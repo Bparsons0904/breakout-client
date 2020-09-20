@@ -109,7 +109,7 @@ export class AuthService {
           }
           this.userAuthenticated.next(false);
           this.loading.next(false);
-        } else if (data.me.id > 0) {
+        } else if (data.me.id != null) {
           // If data includes a user id, it is authenticated
           this.userAuthenticated.next(true);
           this.loading.next(false);
@@ -139,6 +139,10 @@ export class AuthService {
    */
   public isLoaded(): Observable<boolean> {
     return this.loading.asObservable();
+  }
+
+  public setLoading(loading: boolean): void {
+    this.loading.next(loading);
   }
 
   /**

@@ -1,17 +1,28 @@
-<form class="form" (ngSubmit)="onSubmit()">
-  <input
-    type="text"
-    name="username"
-    [(ngModel)]="username"
-    placeholder="Username or email"
-  />
-  <input
-    type="password"
-    name="password"
-    [(ngModel)]="password"
-    placeholder="Password"
-  />
-  <input type="submit" value="Submit" class="btn" />
-</form>
+<div class="container">
+  <div class="card shadow">
+    <img src="../../../assets/login-img.jpg" alt="" class="card-img-top" />
+    <div class="card-body">
+      <h1>Breakout Login</h1>
+      <form class="form" (ngSubmit)="onSubmit()">
+        <input
+          type="text"
+          name="username"
+          [(ngModel)]="username"
+          placeholder="Username or email"
+        />
+        <input
+          type="password"
+          name="password"
+          [(ngModel)]="password"
+          placeholder="Password"
+        />
+        <button type="submit" value="Submit" class="btn btn-primary">
+          Login
+        </button>
+      </form>
+    </div>
+  </div>
 
-<button [routerLink]="['/register']">Create Account</button>
+  <div class="registered"></div>
+  <a [routerLink]="['/register']">Not registered? Create Account</a>
+</div>

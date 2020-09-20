@@ -1,15 +1,21 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-loading',
   templateUrl: './loading.component.html',
-  styleUrls: ['./loading.component.scss']
+  styleUrls: ['./loading.component.scss'],
 })
 export class LoadingComponent implements OnInit {
+  public loading: boolean;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private authService: AuthService) {
+    this.loading = false;
   }
 
+  ngOnInit(): void {
+    this.authService.isLoaded().subscribe((loading) => {
+      this.loading = loading;
+    });
+  }
 }
