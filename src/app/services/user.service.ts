@@ -4,7 +4,6 @@ import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { map } from 'rxjs/operators';
 import { User } from '../models/User';
-import { UserProfile } from '../models/UserProfile';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 // import { AuthService } from './auth.service';
 
@@ -89,35 +88,31 @@ export class UserService {
     username: '',
     email: '',
     password: '',
-    firstName: '',
-    lastName: '',
-    phoneNumber: '',
     role: '',
-    completedProfile: false,
   };
 
-  private userProfile: BehaviorSubject<UserProfile>;
-  private defaultProfile: UserProfile = {
-    userId: '',
-    statement: '',
-    education: [],
-    workExperience: [],
-    lookingFor: [],
-    skills: [],
-    active: false,
-    address1: '',
-    address2: '',
-    city: '',
-    state: '',
-    zip: 0,
-    country: '',
-  };
+  // private userProfile: BehaviorSubject<UserProfile>;
+  // private defaultProfile: UserProfile = {
+  //   userId: '',
+  //   statement: '',
+  //   education: [],
+  //   workExperience: [],
+  //   lookingFor: [],
+  //   skills: [],
+  //   active: false,
+  //   address1: '',
+  //   address2: '',
+  //   city: '',
+  //   state: '',
+  //   zip: 0,
+  //   country: '',
+  // };
   constructor(
     private apollo: Apollo,
     private router: Router // private authService: AuthService
   ) {
     // Init Observables
-    this.userProfile = new BehaviorSubject<UserProfile>(this.defaultProfile);
+    // this.userProfile = new BehaviorSubject<UserProfile>(this.defaultProfile);
     this.user = new BehaviorSubject<User>(this.defaultUser);
   }
 
@@ -147,71 +142,71 @@ export class UserService {
   /**
    * Query and return user profile data as observable
    */
-  getUserProfile(): Observable<UserProfile> {
-    this.apollo
-      .watchQuery<any>({
-        query: getUserProfile,
-        variables: {
-          userId: this.userDetails.id,
-        },
-      })
-      .valueChanges.subscribe(({ data, loading }) => {
-        this.userProfile.next(data.getUserProfile);
-      });
-    return this.userProfile.asObservable();
-  }
+  // getUserProfile(): Observable<UserProfile> {
+  //   this.apollo
+  //     .watchQuery<any>({
+  //       query: getUserProfile,
+  //       variables: {
+  //         userId: this.userDetails.id,
+  //       },
+  //     })
+  //     .valueChanges.subscribe(({ data, loading }) => {
+  //       this.userProfile.next(data.getUserProfile);
+  //     });
+  //   return this.userProfile.asObservable();
+  // }
 
   /**
    * Create a user profile and set user to completed profile
    *
    * @param profile User profile data to create profile
    */
-  submitProfile(profile: UserProfile): void {
-    // Set loading to true
-    // this.authService.loading.next(true);
-    // Start mutation query
-    profile.userId = this.user.value.id;
-    this.apollo
-      .mutate({
-        mutation: createProfile,
-        variables: {
-          ...profile,
-        },
-      })
-      .subscribe(
-        ({ data }) => {
-          // Add data to user using deconstructor
-          this.userProfile = { ...data['createdProfile'] };
-          // Return to profile
-          this.router.navigate(['/profile']);
-        },
-        (error) => {
-          // Stop loading
-          // this.authService.loading.next(true);
-          console.log('there was an error sending the query', error);
-        }
-      );
-    this.apollo
-      .mutate({
-        mutation: updateUser,
-        variables: {
-          id: this.userDetails.id,
-          completedProfile: true,
-        },
-      })
-      .subscribe(
-        ({ data }) => {
-          // Add data to user using deconstructor
-          // this.userProfile = { ...data['createdProfile'] };
-          // Return to profile
-          // this.router.navigate(['/profile']);
-          console.log(data);
-        },
-        (error) => {
-          // Stop loading
-          // this.authService.loading.next(true);
-          console.log('there was an error sending the query', error);
-        }
-      );
-  }
+  // submitProfile(profile: UserProfile): void {
+  //   // Set loading to true
+  //   // this.authService.loading.next(true);
+  //   // Start mutation query
+  //   profile.userId = this.user.value.id;
+  //   this.apollo
+  //     .mutate({
+  //       mutation: createProfile,
+  //       variables: {
+  //         ...profile,
+  //       },
+  //     })
+  //     .subscribe(
+  //       ({ data }) => {
+  //         // Add data to user using deconstructor
+  //         this.userProfile = { ...data['createdProfile'] };
+  //         // Return to profile
+  //         this.router.navigate(['/profile']);
+  //       },
+  //       (error) => {
+  //         // Stop loading
+  //         // this.authService.loading.next(true);
+  //         console.log('there was an error sending the query', error);
+  //       }
+  //     );
+  //   this.apollo
+  //     .mutate({
+  //       mutation: updateUser,
+  //       variables: {
+  //         id: this.userDetails.id,
+  //         completedProfile: true,
+  //       },
+  //     })
+  //     .subscribe(
+  //       ({ data }) => {
+  //         // Add data to user using deconstructor
+  //         // this.userProfile = { ...data['createdProfile'] };
+  //         // Return to profile
+  //         // this.router.navigate(['/profile']);
+  //         console.log(data);
+  //       },
+  //       (error) => {
+  //         // Stop loading
+  //         // this.authService.loading.next(true);
+  //         console.log('there was an error sending the query', error);
+  //       }
+  //     );
+  // }
 }

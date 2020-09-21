@@ -9,14 +9,10 @@ import { User } from '../../../models/User';
 })
 export class RegisterComponent implements OnInit {
   public user: User = {
-    firstName: '',
-    lastName: '',
     username: '',
     email: '',
-    phoneNumber: '',
     password: '',
     role: 'user',
-    completedProfile: false,
   };
 
   constructor(private authService: AuthService) {}
@@ -27,6 +23,6 @@ export class RegisterComponent implements OnInit {
    *  Submits user to be registered
    */
   onSubmit(): void {
-    this.authService.registerUser(this.user);
+    this.authService.signUp(this.user);
   }
 }

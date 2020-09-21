@@ -10,7 +10,7 @@ export class LoadingComponent implements OnInit {
   public loading: boolean;
 
   constructor(private authService: AuthService) {
-    this.loading = false;
+    this.loading = true;
   }
 
   ngOnInit(): void {

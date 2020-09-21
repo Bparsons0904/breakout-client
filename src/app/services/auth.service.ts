@@ -5,6 +5,7 @@ import gql from 'graphql-tag';
 import { User } from '../models/User';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { UserService } from './user.service';
+import { MessagesService } from './messages.service';
 
 /**
  * Query for getting current user
@@ -19,23 +20,17 @@ const getMe = gql`
 /**
  * Mutation for registering user
  */
-const registerUser = gql`
-  mutation registerUser(
-    $firstName: String!
-    $lastName: String!
+const signUp = gql`
+  mutation signUp(
     $username: String!
     $password: String!
     $email: String!
-    $phoneNumber: String
     $role: String!
   ) {
-    registerUser(
-      firstName: $firstName
-      lastName: $lastName
+    signUp(
       username: $username
       email: $email
       password: $password
-      phoneNumber: $phoneNumber
       role: $role
     ) {
       user {
@@ -61,13 +56,14 @@ const signIn = gql`
 })
 export class AuthService {
   private userAuthenticated: BehaviorSubject<boolean>;
-  public loading: BehaviorSubject<boolean>;
+  private loading: BehaviorSubject<boolean>;
   private user: User;
 
   constructor(
     private apollo: Apollo,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private messagesService: MessagesService
   ) {
     // Initialize the observable variables with default values
     this.userAuthenticated = new BehaviorSubject<boolean>(false);
@@ -152,8 +148,9 @@ export class AuthService {
    * @param password User inputted password
    */
   public signIn(login: string, password: string): void {
+    this.messagesService.clearErrorMessage();
     // Set loading to true
-    this.loading.next(true);
+    this.setLoading(true);
     // Start mutation query
     this.apollo
       .mutate({
@@ -171,11 +168,13 @@ export class AuthService {
           localStorage.setItem('breakoutToken', token);
           // Refresh x-token header
           location.reload();
+          // Return to home page
+          this.router.navigate(['/']);
         },
         (error) => {
           // Stop loading
           this.loading.next(false);
-          console.log('there was an error sending the query', error);
+          this.messagesService.setErrorMessage(error);
         }
       );
   }
@@ -186,19 +185,16 @@ export class AuthService {
    * @param login User selected username or email
    * @param password User inputted password
    */
-  public registerUser(user: User): void {
+  public signUp(user: User): void {
     // Set loading to true
     this.loading.next(true);
     this.apollo
       .mutate({
-        mutation: registerUser,
+        mutation: signUp,
         variables: {
           username: user.username,
           password: user.password,
           email: user.email,
-          firstName: user.firstName,
-          lastName: user.lastName,
-          phoneNumber: user.phoneNumber,
           role: user.role,
         },
       })

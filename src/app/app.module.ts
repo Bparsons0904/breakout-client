@@ -10,12 +10,15 @@ import { NgModule } from '@angular/core';
 
 import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
+import { MessagesService } from './services/messages.service';
+
 import { NavbarComponent } from './components/modules/navbar/navbar.component';
 import { GraphQLModule } from './graphql.module';
 import { HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { LoginComponent } from './components/modules/login/login.component';
 import { RegisterComponent } from './components/pages/register/register.component';
 import { LoadingComponent } from './components/modules/loading/loading.component';
+import { MessagesComponent } from './components/modules/messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,7 @@ import { LoadingComponent } from './components/modules/loading/loading.component
     LoginComponent,
     RegisterComponent,
     LoadingComponent,
+    MessagesComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,7 +39,7 @@ import { LoadingComponent } from './components/modules/loading/loading.component
     HttpClientModule,
     HttpLinkModule,
   ],
-  providers: [AuthService, UserService],
+  providers: [AuthService, UserService, MessagesService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -4,25 +4,37 @@
     <div class="card-body">
       <h1>Breakout Login</h1>
       <form class="form" (ngSubmit)="onSubmit()">
-        <input
-          type="text"
-          name="username"
-          [(ngModel)]="username"
-          placeholder="Username or email"
-        />
-        <input
-          type="password"
-          name="password"
-          [(ngModel)]="password"
-          placeholder="Password"
-        />
-        <button type="submit" value="Submit" class="btn btn-primary">
-          Login
-        </button>
+        <div class="mb-3">
+          <label class="form-label" for="loginInput">Username or Email</label>
+          <input
+            class="form-control"
+            id="loginInput"
+            type="text"
+            name="username"
+            [(ngModel)]="username"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="passwordInput">Password</label>
+          <input
+            class="form-control"
+            id="passwordInput"
+            type="password"
+            name="password"
+            [(ngModel)]="password"
+          />
+        </div>
+        <app-messages></app-messages>
+        <div class="row m-3">
+          <button type="submit" value="Submit" class="btn btn-primary">
+            Login
+          </button>
+          <div class="authentication text-center">
+            <a [routerLink]="['/register']">Not registered? Create Account</a>
+          </div>
+        </div>
       </form>
     </div>
   </div>
-
-  <div class="registered"></div>
-  <a [routerLink]="['/register']">Not registered? Create Account</a>
 </div>

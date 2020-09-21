@@ -21,8 +21,6 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     // Subscribe to watch for any updated to the users authentication status
     this.authService.isAuthenticated().subscribe((status) => {
-      console.log(status);
-
       this.userLoggedIn = status;
       // this.userService.getUser().subscribe((user) => {
       //   this.user = { ...user };

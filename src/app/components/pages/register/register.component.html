@@ -1,41 +1,51 @@
-<form class="form" (ngSubmit)="onSubmit()">
-  <input
-    type="text"
-    name="user.firstName"
-    [(ngModel)]="user.firstName"
-    placeholder="First Name"
-  />
-  <input
-    type="text"
-    name="user.lastName"
-    [(ngModel)]="user.lastName"
-    placeholder="Last Name"
-  />
-  <input
-    type="text"
-    name="user.username"
-    [(ngModel)]="user.username"
-    placeholder="Username"
-  />
-  <input
-    type="email"
-    name="user.email"
-    [(ngModel)]="user.email"
-    placeholder="Email Address"
-  />
-  <input
-    type="text"
-    name="user.phoneNumber"
-    [(ngModel)]="user.phoneNumber"
-    placeholder="Phone Number"
-  />
-  <input
-    type="password"
-    name="user.password"
-    [(ngModel)]="user.password"
-    placeholder="Password"
-  />
-  <input type="submit" value="Submit" class="btn" />
-</form>
+<div class="container">
+  <div class="card shadow">
+    <img src="../../../assets/login-img.jpg" alt="" class="card-img-top" />
+    <div class="card-body">
+      <h1>Register a Breakout Account</h1>
+      <form (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label class="form-label" for="usernameInput">Username</label>
+          <input
+            class="form-control"
+            id="usernameInput"
+            type="text"
+            name="user.username"
+            [(ngModel)]="user.username"
+          />
+        </div>
 
-<button [routerLink]="['/login']">Already registered? Login</button>
+        <div class="mb-3">
+          <label class="form-label" for="emailInput">Email</label>
+          <input
+            class="form-control"
+            type="email"
+            id="emailInput"
+            name="user.email"
+            [(ngModel)]="user.email"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="passwordInput">Password</label>
+          <input
+            class="form-control"
+            id="passwordInput"
+            type="password"
+            name="user.password"
+            [(ngModel)]="user.password"
+          />
+        </div>
+        <app-messages></app-messages>
+        <div class="row m-3">
+          <button type="submit" value="Submit" class="btn btn-primary">
+            Register
+          </button>
+          <div class="authentication text-center">
+            <a [routerLink]="['/login']">Already registered? Login</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
