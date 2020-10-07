@@ -1,0 +1,13 @@
+<section>
+  <div *ngFor="let company of companies">
+    <div class="card" *ngIf="company.active">
+      <img src="{{ company.imageUrl }}" class="card-img-top" alt="..." />
+      <div class="card-body">
+        <h5 class="card-title">{{ company.name }}</h5>
+        <p class="card-text">{{ company.description }}</p>
+        <p class="card-text">{{ company.location }}</p>
+        <a href="" class="btn btn-primary">Visit {{ company.name }}</a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -7,10 +7,11 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class MessagesService {
   private errorMessage: BehaviorSubject<string>;
   private infoMessage: BehaviorSubject<string>;
-
+  private loading: BehaviorSubject<boolean>;
   constructor() {
     this.errorMessage = new BehaviorSubject<string>('');
     this.infoMessage = new BehaviorSubject<string>('');
+    this.loading = new BehaviorSubject<boolean>(true);
   }
 
   public getErrorMessage(): Observable<string> {
@@ -36,5 +37,15 @@ export class MessagesService {
   }
   public clearInfoMessage(): void {
     this.infoMessage.next('');
+  }
+  /**
+   * Return an observable to indicate if something is loading
+   */
+  public isLoaded(): Observable<boolean> {
+    return this.loading.asObservable();
+  }
+
+  public setLoading(loading: boolean): void {
+    this.loading.next(loading);
   }
 }

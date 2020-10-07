@@ -56,7 +56,7 @@ const signIn = gql`
 })
 export class AuthService {
   private userAuthenticated: BehaviorSubject<boolean>;
-  private loading: BehaviorSubject<boolean>;
+
   private user: User;
 
   constructor(
@@ -67,7 +67,6 @@ export class AuthService {
   ) {
     // Initialize the observable variables with default values
     this.userAuthenticated = new BehaviorSubject<boolean>(false);
-    this.loading = new BehaviorSubject<boolean>(true);
 
     /**
      * This is the 1st type of query, use when a observable is not needed/desired
@@ -104,11 +103,11 @@ export class AuthService {
             localStorage.setItem('breakoutToken', null);
           }
           this.userAuthenticated.next(false);
-          this.loading.next(false);
+          this.messagesService.setLoading(false);
         } else if (data.me.id != null) {
           // If data includes a user id, it is authenticated
           this.userAuthenticated.next(true);
-          this.loading.next(false);
+          this.messagesService.setLoading(false);
           // this.userService.setUser(data.me);
           // if (!data.me.completedProfile) {
           //   this.router.navigate(['/createprofile']);
@@ -119,7 +118,7 @@ export class AuthService {
         } else {
           // If data id isn't included, set to false
           this.userAuthenticated.next(false);
-          this.loading.next(false);
+          this.messagesService.setLoading(false);
         }
       });
   }
@@ -129,16 +128,6 @@ export class AuthService {
    */
   public isAuthenticated(): Observable<boolean> {
     return this.userAuthenticated.asObservable();
-  }
-  /**
-   * Return an observable to indicate if something is loading
-   */
-  public isLoaded(): Observable<boolean> {
-    return this.loading.asObservable();
-  }
-
-  public setLoading(loading: boolean): void {
-    this.loading.next(loading);
   }
 
   /**
@@ -150,7 +139,7 @@ export class AuthService {
   public signIn(login: string, password: string): void {
     this.messagesService.clearErrorMessage();
     // Set loading to true
-    this.setLoading(true);
+    this.messagesService.setLoading(true);
     // Start mutation query
     this.apollo
       .mutate({
@@ -166,14 +155,15 @@ export class AuthService {
           const token = data['signIn']['token'];
           // Store token to local storage
           localStorage.setItem('breakoutToken', token);
-          // Refresh x-token header
-          location.reload();
           // Return to home page
-          this.router.navigate(['/']);
+          this.router.navigate(['/']).then(() => {
+            // Refresh x-token header
+            location.reload();
+          });
         },
         (error) => {
           // Stop loading
-          this.loading.next(false);
+          this.messagesService.setLoading(false);
           this.messagesService.setErrorMessage(error);
         }
       );
@@ -187,7 +177,7 @@ export class AuthService {
    */
   public signUp(user: User): void {
     // Set loading to true
-    this.loading.next(true);
+    this.messagesService.setLoading(true);
     this.apollo
       .mutate({
         mutation: signUp,
@@ -207,13 +197,13 @@ export class AuthService {
           // Set authentication to true
           this.userAuthenticated.next(true);
           // Stop loading animation
-          this.loading.next(false);
+          this.messagesService.setLoading(false);
           // Return to home page
           this.router.navigate(['/']);
         },
         (error) => {
           // Stop loading
-          this.loading.next(false);
+          this.messagesService.setLoading(false);
           console.log('there was an error sending the query', error);
         }
       );

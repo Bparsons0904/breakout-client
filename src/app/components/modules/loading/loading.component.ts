@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../../services/auth.service';
+import { MessagesService } from '../../../services/messages.service';
 
 @Component({
   selector: 'app-loading',
@@ -9,12 +9,12 @@ import { AuthService } from '../../../services/auth.service';
 export class LoadingComponent implements OnInit {
   public loading: boolean;
 
-  constructor(private authService: AuthService) {
+  constructor(private messageService: MessagesService) {
     this.loading = true;
   }
 
   ngOnInit(): void {
-    this.authService.isLoaded().subscribe((loading) => {
+    this.messageService.isLoaded().subscribe((loading) => {
       this.loading = loading;
     });
   }

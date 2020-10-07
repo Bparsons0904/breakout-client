@@ -9,14 +9,8 @@ import { AuthService } from '../../../services/auth.service';
 })
 export class HomeComponent implements OnInit {
   public isAuthenticated: boolean = false;
-  public loading: boolean = true;
 
   constructor(public authService: AuthService) {}
 
-  ngOnInit(): void {
-    // Watch for loading changes
-    this.authService.isLoaded().subscribe((loading) => {
-      this.loading = loading;
-    });
-  }
+  ngOnInit(): void {}
 }

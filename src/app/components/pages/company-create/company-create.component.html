@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="card shadow">
+    <img
+      src="../../../assets/escape-company-lobby.jpg"
+      alt=""
+      class="card-img-top"
+    />
+    <div class="card-body">
+      <h1>Register a Breakout Company</h1>
+      <form (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label class="form-label" for="name">Name</label>
+          <input
+            class="form-control"
+            id="name"
+            type="text"
+            name="company.name"
+            [(ngModel)]="company.name"
+          />
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="description">Description</label>
+          <textarea
+            class="form-control"
+            id="description"
+            type="text"
+            name="company.description"
+            [(ngModel)]="company.description"
+          ></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="location">Location</label>
+          <input
+            class="form-control"
+            type="text"
+            id="location"
+            name="company.location"
+            [(ngModel)]="company.location"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="website">Website</label>
+          <input
+            class="form-control"
+            id="website"
+            type="text"
+            name="company.website"
+            [(ngModel)]="company.website"
+          />
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="image">Company Image</label>
+          <input
+            class="form-control"
+            id="image"
+            type="text"
+            name="company.imageUrl"
+            [(ngModel)]="company.imageUrl"
+          />
+        </div>
+        <app-messages></app-messages>
+        <div class="row m-3">
+          <button type="submit" value="Submit" class="btn btn-primary">
+            Add Company
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
