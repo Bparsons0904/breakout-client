@@ -18,7 +18,9 @@ export class CompanyApproveComponent implements OnInit {
     });
   }
 
-  setApproval(company: Company, approval: boolean): void {
-    console.log('Yeah baby');
+  setApproval(company: Company): void {
+    console.log(company);
+
+    this.companyService.approveCompany(company);
   }
 }

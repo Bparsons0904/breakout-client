@@ -22,6 +22,6 @@ export class CompanyCreateComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit(): void {
-    this.companyService.register(this.company);
+    this.companyService.registerCompany(this.company);
   }
 }

@@ -37,12 +37,23 @@ const createCompany = gql`
 const getCompanies = gql`
   {
     companies {
+      id
       name
       description
       website
       location
       imageUrl
+      active
     }
+  }
+`;
+
+/**
+ * Query for getting companies
+ */
+const approveCompany = gql`
+  mutation approveCompany($id: ID!) {
+    approveCompany(id: $id)
   }
 `;
 
@@ -81,7 +92,38 @@ export class CompanyService {
       });
   }
 
-  register(company: Company): void {
+  approveCompany(company: Company): void {
+    console.log(company);
+    this.apollo
+      .mutate({
+        mutation: approveCompany,
+        variables: {
+          id: company.id,
+        },
+      })
+      .subscribe(
+        ({ data }) => {
+          // // Set token to returned data value
+          // const token = data['registerUser']['token'];
+          // // Store token to local storage
+          // localStorage.setItem('breakoutToken', token);
+          // // Set authentication to true
+          // this.userAuthenticated.next(true);
+          // // Stop loading animation
+          // this.loading.next(false);
+          // // Return to home page
+          // this.router.navigate(['/']);
+          console.log(data);
+        },
+        (error) => {
+          // Stop loading
+          // this.loading.next(false);
+          console.log('there was an error sending the query', error);
+        }
+      );
+  }
+
+  registerCompany(company: Company): void {
     console.log('made it to service', company);
     // this.loading.next(true);
     this.apollo
