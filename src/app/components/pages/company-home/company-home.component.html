@@ -1,13 +1,16 @@
 <section>
   <button (click)="display('list')">List Breakout Companies</button>
   <button (click)="display('new')">Submit New Company</button>
+  <button (click)="display('approve')" *ngIf="admin">Approve Companies</button>
 </section>
-
 <section>
   <div *ngIf="displayType === 'list'">
     <app-company-list></app-company-list>
   </div>
   <div *ngIf="displayType === 'new'">
     <app-company-create></app-company-create>
+  </div>
+  <div *ngIf="displayType === 'approve'">
+    <app-company-approve></app-company-approve>
   </div>
 </section>

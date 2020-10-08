@@ -23,6 +23,7 @@ import { MessagesComponent } from './components/modules/messages/messages.compon
 import { CompanyCreateComponent } from './components/pages/company-create/company-create.component';
 import { CompanyListComponent } from './components/pages/company-list/company-list.component';
 import { CompanyHomeComponent } from './components/pages/company-home/company-home.component';
+import { CompanyApproveComponent } from './components/pages/company-approve/company-approve.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { CompanyHomeComponent } from './components/pages/company-home/company-ho
     CompanyCreateComponent,
     CompanyListComponent,
     CompanyHomeComponent,
+    CompanyApproveComponent,
   ],
   imports: [
     BrowserModule,

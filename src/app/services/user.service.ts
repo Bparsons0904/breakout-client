@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
-import { map } from 'rxjs/operators';
+// import { map } from 'rxjs/operators';
 import { User } from '../models/User';
+import { Room } from '../models/Room';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 // import { AuthService } from './auth.service';
 
@@ -84,10 +85,9 @@ export class UserService {
   private user: BehaviorSubject<User>;
   private userDetails: User;
   private defaultUser: User = {
-    id: '1',
+    id: '',
     username: '',
     email: '',
-    password: '',
     role: '',
   };
 
@@ -120,7 +120,7 @@ export class UserService {
    * Set both private user and observable user
    */
   setUser(user: User): void {
-    this.userDetails = { ...user };
+    // this.userDetails = { ...user };
     this.user.next({ ...user });
   }
 

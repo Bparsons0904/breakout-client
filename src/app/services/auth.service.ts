@@ -14,6 +14,20 @@ const getMe = gql`
   {
     me {
       id
+      username
+      email
+      role
+      wishlist {
+        id
+      }
+      completedRooms {
+        id
+      }
+      favorites {
+        id
+      }
+      successfulRooms
+      failedRooms
     }
   }
 `;
@@ -56,8 +70,8 @@ const signIn = gql`
 })
 export class AuthService {
   private userAuthenticated: BehaviorSubject<boolean>;
-
-  private user: User;
+  private admin: BehaviorSubject<boolean>;
+  // private user: User;
 
   constructor(
     private apollo: Apollo,
@@ -67,7 +81,7 @@ export class AuthService {
   ) {
     // Initialize the observable variables with default values
     this.userAuthenticated = new BehaviorSubject<boolean>(false);
-
+    this.admin = new BehaviorSubject<boolean>(false);
     /**
      * This is the 1st type of query, use when a observable is not needed/desired
      */
@@ -108,7 +122,10 @@ export class AuthService {
           // If data includes a user id, it is authenticated
           this.userAuthenticated.next(true);
           this.messagesService.setLoading(false);
-          // this.userService.setUser(data.me);
+          this.userService.setUser(data.me);
+          if (data.me.role == 'admin') {
+            this.admin.next(true);
+          }
           // if (!data.me.completedProfile) {
           //   this.router.navigate(['/createprofile']);
           // } else {
@@ -128,6 +145,13 @@ export class AuthService {
    */
   public isAuthenticated(): Observable<boolean> {
     return this.userAuthenticated.asObservable();
+  }
+
+  /**
+   * Return an observable to watch if user is authenticated
+   */
+  public isAdmin(): Observable<boolean> {
+    return this.admin.asObservable();
   }
 
   /**
