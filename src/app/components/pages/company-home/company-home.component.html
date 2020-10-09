@@ -2,6 +2,7 @@
   <button (click)="display('list')">List Breakout Companies</button>
   <button (click)="display('new')">Submit New Company</button>
   <button (click)="display('approve')" *ngIf="admin">Approve Companies</button>
+  <app-messages></app-messages>
 </section>
 <section>
   <div *ngIf="displayType === 'list'">

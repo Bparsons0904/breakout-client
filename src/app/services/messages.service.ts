@@ -7,11 +7,14 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class MessagesService {
   private errorMessage: BehaviorSubject<string>;
   private infoMessage: BehaviorSubject<string>;
-  private loading: BehaviorSubject<boolean>;
+  private loadingBig: BehaviorSubject<boolean>;
+  private loadingSmall: BehaviorSubject<boolean>;
+
   constructor() {
     this.errorMessage = new BehaviorSubject<string>('');
     this.infoMessage = new BehaviorSubject<string>('');
-    this.loading = new BehaviorSubject<boolean>(true);
+    this.loadingBig = new BehaviorSubject<boolean>(true);
+    this.loadingSmall = new BehaviorSubject<boolean>(false);
   }
 
   public getErrorMessage(): Observable<string> {
@@ -29,11 +32,14 @@ export class MessagesService {
   public getInfoMessage(): Observable<string> {
     return this.infoMessage.asObservable();
   }
-  public setInfoMessage(infoMessage: string): void {
+
+  public setInfoMessage(infoMessage: string, delay: number = 5000): void {
+    console.log(infoMessage);
+
     this.infoMessage.next(infoMessage);
     setTimeout(() => {
       this.clearInfoMessage();
-    }, 5000);
+    }, delay);
   }
   public clearInfoMessage(): void {
     this.infoMessage.next('');
@@ -41,11 +47,21 @@ export class MessagesService {
   /**
    * Return an observable to indicate if something is loading
    */
-  public isLoaded(): Observable<boolean> {
-    return this.loading.asObservable();
+  public isLoadedBig(): Observable<boolean> {
+    return this.loadingBig.asObservable();
   }
 
-  public setLoading(loading: boolean): void {
-    this.loading.next(loading);
+  public setLoadingBig(loading: boolean): void {
+    this.loadingBig.next(loading);
+  }
+  /**
+   * Return an observable to indicate if something is loading
+   */
+  public isLoadedSmall(): Observable<boolean> {
+    return this.loadingSmall.asObservable();
+  }
+
+  public setLoadingSmall(loading: boolean): void {
+    this.loadingSmall.next(loading);
   }
 }

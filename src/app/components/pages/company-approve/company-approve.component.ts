@@ -23,4 +23,8 @@ export class CompanyApproveComponent implements OnInit {
 
     this.companyService.approveCompany(company);
   }
+
+  denyApproval(company: Company): void {
+    this.companyService.removeCompany(company);
+  }
 }

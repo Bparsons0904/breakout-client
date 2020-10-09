@@ -24,6 +24,7 @@ import { CompanyCreateComponent } from './components/pages/company-create/compan
 import { CompanyListComponent } from './components/pages/company-list/company-list.component';
 import { CompanyHomeComponent } from './components/pages/company-home/company-home.component';
 import { CompanyApproveComponent } from './components/pages/company-approve/company-approve.component';
+import { MiniLoaderComponent } from './components/modules/mini-loader/mini-loader.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { CompanyApproveComponent } from './components/pages/company-approve/comp
     CompanyListComponent,
     CompanyHomeComponent,
     CompanyApproveComponent,
+    MiniLoaderComponent,
   ],
   imports: [
     BrowserModule,

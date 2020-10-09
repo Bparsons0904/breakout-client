@@ -6,7 +6,10 @@
         <h5 class="card-title">{{ company.name }}</h5>
         <p class="card-text">{{ company.description }}</p>
         <p class="card-text">{{ company.location }}</p>
-        <a href="" class="btn btn-primary">Visit {{ company.name }}</a>
+        <a href="{{ company.website }}">Visit {{ company.name }}</a>
+        <button (click)="removeCompany(company)" class="btn btn-danger">
+          Remove
+        </button>
       </div>
     </div>
   </div>

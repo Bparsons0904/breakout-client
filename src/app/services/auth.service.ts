@@ -117,11 +117,11 @@ export class AuthService {
             localStorage.setItem('breakoutToken', null);
           }
           this.userAuthenticated.next(false);
-          this.messagesService.setLoading(false);
+          this.messagesService.setLoadingBig(false);
         } else if (data.me.id != null) {
           // If data includes a user id, it is authenticated
           this.userAuthenticated.next(true);
-          this.messagesService.setLoading(false);
+          this.messagesService.setLoadingBig(false);
           this.userService.setUser(data.me);
           if (data.me.role == 'admin') {
             this.admin.next(true);
@@ -135,7 +135,7 @@ export class AuthService {
         } else {
           // If data id isn't included, set to false
           this.userAuthenticated.next(false);
-          this.messagesService.setLoading(false);
+          this.messagesService.setLoadingBig(false);
         }
       });
   }
@@ -163,7 +163,7 @@ export class AuthService {
   public signIn(login: string, password: string): void {
     this.messagesService.clearErrorMessage();
     // Set loading to true
-    this.messagesService.setLoading(true);
+    this.messagesService.setLoadingBig(true);
     // Start mutation query
     this.apollo
       .mutate({
@@ -187,7 +187,7 @@ export class AuthService {
         },
         (error) => {
           // Stop loading
-          this.messagesService.setLoading(false);
+          this.messagesService.setLoadingBig(false);
           this.messagesService.setErrorMessage(error);
         }
       );
@@ -201,7 +201,7 @@ export class AuthService {
    */
   public signUp(user: User): void {
     // Set loading to true
-    this.messagesService.setLoading(true);
+    this.messagesService.setLoadingBig(true);
     this.apollo
       .mutate({
         mutation: signUp,
@@ -221,13 +221,13 @@ export class AuthService {
           // Set authentication to true
           this.userAuthenticated.next(true);
           // Stop loading animation
-          this.messagesService.setLoading(false);
+          this.messagesService.setLoadingBig(false);
           // Return to home page
           this.router.navigate(['/']);
         },
         (error) => {
           // Stop loading
-          this.messagesService.setLoading(false);
+          this.messagesService.setLoadingBig(false);
           console.log('there was an error sending the query', error);
         }
       );
