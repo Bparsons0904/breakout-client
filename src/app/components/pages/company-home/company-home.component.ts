@@ -12,6 +12,7 @@ import { AuthService } from '../../../services/auth.service';
 export class CompanyHomeComponent implements OnInit {
   public displayType: string;
 
+  public isAuthenticated: boolean;
   public admin: boolean;
 
   constructor(
@@ -24,6 +25,9 @@ export class CompanyHomeComponent implements OnInit {
     //   console.log(data);
     // });
     this.authService.isAdmin().subscribe((admin) => (this.admin = admin));
+    this.authService
+      .isAuthenticated()
+      .subscribe((auth) => (this.isAuthenticated = auth));
   }
 
   display(displayType: string) {

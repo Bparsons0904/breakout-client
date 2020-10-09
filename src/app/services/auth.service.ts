@@ -35,21 +35,8 @@ const getMe = gql`
  * Mutation for registering user
  */
 const signUp = gql`
-  mutation signUp(
-    $username: String!
-    $password: String!
-    $email: String!
-    $role: String!
-  ) {
-    signUp(
-      username: $username
-      email: $email
-      password: $password
-      role: $role
-    ) {
-      user {
-        id
-      }
+  mutation signUp($username: String!, $password: String!, $email: String!) {
+    signUp(username: $username, email: $email, password: $password) {
       token
     }
   }
@@ -203,19 +190,18 @@ export class AuthService {
     // Set loading to true
     this.messagesService.setLoadingBig(true);
     this.apollo
-      .mutate({
+      .mutate<any>({
         mutation: signUp,
         variables: {
           username: user.username,
           password: user.password,
           email: user.email,
-          role: user.role,
         },
       })
       .subscribe(
         ({ data }) => {
           // Set token to returned data value
-          const token = data['registerUser']['token'];
+          const token = data.signUp.token;
           // Store token to local storage
           localStorage.setItem('breakoutToken', token);
           // Set authentication to true
@@ -223,7 +209,7 @@ export class AuthService {
           // Stop loading animation
           this.messagesService.setLoadingBig(false);
           // Return to home page
-          this.router.navigate(['/']);
+          this.router.navigate(['/']).then(() => location.reload());
         },
         (error) => {
           // Stop loading
