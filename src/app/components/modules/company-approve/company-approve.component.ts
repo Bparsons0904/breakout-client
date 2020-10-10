@@ -9,22 +9,28 @@ import { Company } from '../../../models/Company';
 })
 export class CompanyApproveComponent implements OnInit {
   public companies: [Company];
+  public toApprove: number = 0;
+
   constructor(private companyService: CompanyService) {}
 
   ngOnInit(): void {
     this.companyService.getCompanies().subscribe((data) => {
-      console.log(data);
       this.companies = data;
+      data.forEach((company) => {
+        if (company !== null && !company.active) {
+          this.toApprove++;
+        }
+      });
     });
   }
 
   setApproval(company: Company): void {
-    console.log(company);
-
+    this.toApprove--;
     this.companyService.approveCompany(company);
   }
 
   denyApproval(company: Company): void {
+    this.toApprove--;
     this.companyService.removeCompany(company);
   }
 }
