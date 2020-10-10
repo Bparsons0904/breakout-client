@@ -43,6 +43,7 @@ export class CompanyCreateComponent implements OnInit {
         };
       } else if (result === false) {
         this.messageService.setLoadingSmall(false);
+        this.messageService.clearInfoMessage();
         this.messageService.setErrorMessage(
           `Error adding ${this.company.name}.`
         );

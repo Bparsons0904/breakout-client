@@ -123,6 +123,8 @@ export class AuthService {
           // If data id isn't included, set to false
           this.userAuthenticated.next(false);
           this.messagesService.setLoadingBig(false);
+          console.log("Getme issue");
+          
         }
       });
   }

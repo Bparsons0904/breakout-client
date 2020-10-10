@@ -58,10 +58,13 @@ export class MessagesService {
    * Return an observable to indicate if something is loading
    */
   public isLoadedSmall(): Observable<boolean> {
+    console.log('Observable out');
+
     return this.loadingSmall.asObservable();
   }
 
   public setLoadingSmall(loading: boolean): void {
     this.loadingSmall.next(loading);
+    console.log(loading);
   }
 }

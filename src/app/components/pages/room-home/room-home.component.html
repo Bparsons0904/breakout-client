@@ -1,0 +1,19 @@
+<section>
+    <button (click)="display('list')">List Breakout Rooms</button>
+    <button (click)="display('new')" *ngIf="isAuthenticated">
+        Submit New Room
+    </button>
+    <button (click)="display('approve')" *ngIf="admin">Approve Rooms</button>
+    <app-messages></app-messages>
+</section>
+<section>
+    <div *ngIf="displayType === 'list'">
+        <app-room-list></app-room-list>
+    </div>
+    <div *ngIf="displayType === 'new'">
+        <app-room-create></app-room-create>
+    </div>
+    <div *ngIf="displayType === 'approve'">
+        <app-room-approve></app-room-approve>
+    </div>
+</section>

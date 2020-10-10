@@ -15,8 +15,6 @@ export class LoadingComponent implements OnInit {
 
   ngOnInit(): void {
     this.messageService.isLoadedBig().subscribe((loading) => {
-      console.log('We be loading');
-
       this.loadingBig = loading;
     });
   }

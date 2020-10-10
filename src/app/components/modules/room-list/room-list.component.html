@@ -1,0 +1,15 @@
+<section>
+    <div *ngFor="let room of rooms">
+        <div class="card" *ngIf="room?.active">
+            <img src="{{ room.imageUrl }}" class="card-img-top" alt="..." />
+            <div class="card-body">
+                <h5 class="card-title">{{ room.name }}</h5>
+                <p class="card-text">{{ room.description }}</p>
+                <a href="{{ room.website }}">Visit {{ room.name }}</a>
+                <button (click)="removeRoom(room)" *ngIf="admin" class="btn btn-danger">
+                    Remove
+                </button>
+            </div>
+        </div>
+    </div>
+</section>

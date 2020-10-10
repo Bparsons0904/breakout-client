@@ -25,6 +25,10 @@ import { CompanyListComponent } from './components/pages/company-list/company-li
 import { CompanyHomeComponent } from './components/pages/company-home/company-home.component';
 import { CompanyApproveComponent } from './components/pages/company-approve/company-approve.component';
 import { MiniLoaderComponent } from './components/modules/mini-loader/mini-loader.component';
+import { RoomHomeComponent } from './components/pages/room-home/room-home.component';
+import { RoomCreateComponent } from './components/modules/room-create/room-create.component';
+import { RoomApproveComponent } from './components/modules/room-approve/room-approve.component';
+import { RoomListComponent } from './components/modules/room-list/room-list.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +44,10 @@ import { MiniLoaderComponent } from './components/modules/mini-loader/mini-loade
     CompanyHomeComponent,
     CompanyApproveComponent,
     MiniLoaderComponent,
+    RoomHomeComponent,
+    RoomCreateComponent,
+    RoomApproveComponent,
+    RoomListComponent,
   ],
   imports: [
     BrowserModule,

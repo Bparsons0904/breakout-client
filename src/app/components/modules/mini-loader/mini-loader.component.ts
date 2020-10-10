@@ -9,13 +9,11 @@ import { MessagesService } from '../../../services/messages.service';
 export class MiniLoaderComponent implements OnInit {
   public loadingSmall: boolean;
   constructor(private messageService: MessagesService) {
-    this.loadingSmall = true;
+    this.loadingSmall = false;
   }
 
   ngOnInit(): void {
     this.messageService.isLoadedSmall().subscribe((loading) => {
-      console.log('We be loading');
-
       this.loadingSmall = loading;
     });
   }

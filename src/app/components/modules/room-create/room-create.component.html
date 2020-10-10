@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="card shadow">
+        <img src="../../../assets/escape-room.jpg" alt="" class="card-img-top" />
+        <div class="card-body">
+            <h1>Register a Breakout Room</h1>
+            <form (ngSubmit)="onSubmit()">
+                <div class="mb-3">
+                    <label class="form-label" for="name">Name</label>
+                    <input class="form-control" id="name" type="text" name="room.name" [(ngModel)]="room.name" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="description">Description</label>
+                    <input class="form-control" id="description" type="text" name="room.description"
+                        [(ngModel)]="room.description" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="website">Website</label>
+                    <input class="form-control" id="website" type="text" name="room.website"
+                        [(ngModel)]="room.website" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="image">Room Image</label>
+                    <input class="form-control" id="image" type="text" name="room.imageUrl"
+                        [(ngModel)]="room.imageUrl" />
+                </div>
+                <app-mini-loader></app-mini-loader>
+                <div class="row m-3">
+                    <button type="submit" value="Submit" class="btn btn-primary">
+                        Add Room
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

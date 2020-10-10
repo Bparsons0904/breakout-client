@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/models/User';
-import { Company } from '../../../models/Company';
-import { CompanyService } from '../../../services/company.service';
+// import { User } from 'src/app/models/User';
+// import { Company } from '../../../models/Company';
+// import { CompanyService } from '../../../services/company.service';
 import { AuthService } from '../../../services/auth.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class CompanyHomeComponent implements OnInit {
   public admin: boolean;
 
   constructor(
-    private companyService: CompanyService,
+    // private companyService: CompanyService,
     private authService: AuthService
   ) {}
 

@@ -1,0 +1,21 @@
+<section *ngIf="rooms[0] !== null">
+  <div *ngFor="let room of rooms">
+    <div class="card" *ngIf="!room?.active || room.active === null">
+      <img src="{{ room?.imageUrl }}" class="card-img-top" alt="..." />
+      <div class="card-body">
+        <h5 class="card-title">{{ room.name }}</h5>
+        <p class="card-text">{{ room.description }}</p>
+        <a href="" class="">Visit {{ room.name }}</a>
+        <button class="btn btn-primary" (click)="setApproval(room)">
+          Approve
+        </button>
+        <button class="btn btn-danger" (click)="denyApproval(room)">
+          Deny
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+<section *ngIf="toApprove === 0">
+  <div>No rooms to approve!</div>
+</section>
