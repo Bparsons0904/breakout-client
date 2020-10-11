@@ -7,6 +7,9 @@
         <p class="card-text">{{ company.description }}</p>
         <p class="card-text">{{ company.location }}</p>
         <a href="{{ company.website }}">Visit {{ company.name }}</a>
+        <button [routerLink]="['details/', company.id]" class="btn btn-success">
+          Details
+        </button>
         <button
           (click)="removeCompany(company)"
           *ngIf="admin"

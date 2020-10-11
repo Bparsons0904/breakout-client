@@ -18,7 +18,9 @@ export class CompanyListComponent implements OnInit {
   ngOnInit(): void {
     this.companyService.getCompanies().subscribe((data) => {
       console.log('List page ran', data);
-      this.companies = data;
+      if (data !== null) {
+        this.companies = data;
+      }
     });
     this.authService.isAdmin().subscribe((admin) => (this.admin = admin));
   }

@@ -14,7 +14,6 @@ export class RoomApproveComponent implements OnInit {
 
   ngOnInit(): void {
     this.roomService.getCompanies().subscribe((data) => {
-      console.log(data);
       this.rooms = data;
       data.forEach((room) => {
         if (room !== null && !room.active) {
@@ -25,7 +24,6 @@ export class RoomApproveComponent implements OnInit {
   }
 
   setApproval(room: Room): void {
-    console.log(room);
     this.toApprove--;
     this.roomService.approveRoom(room);
   }

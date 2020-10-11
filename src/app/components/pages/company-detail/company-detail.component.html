@@ -1,0 +1,27 @@
+<section>
+  <div *ngIf="company !== null">
+    <div class="card">
+      <img src="{{ company.imageUrl }}" class="card-img-top" alt="..." />
+      <div class="card-body">
+        <h5 class="card-title">{{ company.name }}</h5>
+        <p class="card-text">{{ company.description }}</p>
+        <p class="card-text">{{ company.location }}</p>
+        <a href="{{ company.website }}">Visit {{ company.name }}</a>
+      </div>
+    </div>
+  </div>
+</section>
+<section *ngIf="company !== null && rooms.length > 0">
+  <h1>{{ company.name }} @ {{ company.location }} Rooms</h1>
+  <div *ngFor="let room of rooms">
+    <div class="card" *ngIf="room?.active">
+      <img src="{{ room.imageUrl }}" class="card-img-top" alt="..." />
+      <div class="card-body">
+        <h5 class="card-title">{{ room.name }}</h5>
+        <p class="card-text">{{ room.description }}</p>
+        <a href="{{ room.website }}">Visit {{ room.name }}</a>
+      </div>
+    </div>
+  </div>
+</section>
+<app-room-create></app-room-create>

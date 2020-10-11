@@ -29,6 +29,8 @@ import { RoomHomeComponent } from './components/pages/room-home/room-home.compon
 import { RoomCreateComponent } from './components/modules/room-create/room-create.component';
 import { RoomApproveComponent } from './components/modules/room-approve/room-approve.component';
 import { RoomListComponent } from './components/modules/room-list/room-list.component';
+import { CompanyDetailComponent } from './components/pages/company-detail/company-detail.component';
+import { RoomDetailComponent } from './components/pages/room-detail/room-detail.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,8 @@ import { RoomListComponent } from './components/modules/room-list/room-list.comp
     RoomCreateComponent,
     RoomApproveComponent,
     RoomListComponent,
+    CompanyDetailComponent,
+    RoomDetailComponent,
   ],
   imports: [
     BrowserModule,

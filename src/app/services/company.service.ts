@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { MessagesService } from './messages.service';
+import { Subscription } from 'rxjs';
 
 /**
  * Mutation for creating company
@@ -25,6 +26,23 @@ const createCompany = gql`
       imageUrl: $imageUrl
       active: $active
     ) {
+      id
+      name
+      description
+      website
+      location
+      imageUrl
+      active
+    }
+  }
+`;
+
+/**
+ * Query for getting company
+ */
+const company = gql`
+  query company($id: ID!) {
+    company(id: $id) {
       id
       name
       description
@@ -91,13 +109,14 @@ const removeCompany = gql`
   providedIn: 'root',
 })
 export class CompanyService {
+  private company: BehaviorSubject<Company>;
   private companies: BehaviorSubject<[Company]>;
   private registerSuccess: BehaviorSubject<Boolean>;
-
   constructor(
     private apollo: Apollo,
     private messagesService: MessagesService
   ) {
+    this.company = new BehaviorSubject<Company>(null);
     this.companies = new BehaviorSubject<[Company]>([null]);
     this.registerSuccess = new BehaviorSubject<Boolean>(null);
 
@@ -166,6 +185,23 @@ export class CompanyService {
           console.log('there was an error sending the query', error);
         }
       );
+  }
+
+  getCompany(id: string): Observable<Company> {
+    this.apollo
+      .watchQuery<any>({
+        query: company,
+        variables: {
+          id: id,
+        },
+      })
+      .valueChanges.subscribe(({ data, loading }) => {
+        // this.loading = loading;
+        // this.currentUser = data.currentUser;
+        this.company.next(data.company);
+        console.log(data.company);
+      });
+    return this.company.asObservable();
   }
 
   removeCompany(company: Company): void {

@@ -43,6 +43,7 @@ const getRooms = gql`
       website
       imageUrl
       active
+      companyId
     }
   }
 `;
@@ -89,7 +90,7 @@ export class RoomService {
     private apollo: Apollo,
     private messagesService: MessagesService
   ) {
-    this.rooms = new BehaviorSubject<[Room]>([null]);
+    this.rooms = new BehaviorSubject<[Room]>(null);
     this.registerSuccess = new BehaviorSubject<Boolean>(null);
 
     this.apollo
@@ -97,6 +98,8 @@ export class RoomService {
         query: getRooms,
       })
       .valueChanges.subscribe(({ data, loading }) => {
+        console.log(data);
+
         this.rooms.next(data.rooms);
         // If no data or does not include me data, set authentiation to false
         // if (data === null || data.me === null) {
