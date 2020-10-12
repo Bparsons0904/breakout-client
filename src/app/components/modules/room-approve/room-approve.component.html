@@ -1,4 +1,4 @@
-<section *ngIf="rooms[0] !== null">
+<section *ngIf="rooms !== null">
   <div *ngFor="let room of rooms">
     <div class="card" *ngIf="!room?.active || room.active === null">
       <img src="{{ room?.imageUrl }}" class="card-img-top" alt="..." />

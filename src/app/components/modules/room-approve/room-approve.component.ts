@@ -8,18 +8,22 @@ import { Room } from '../../../models/Room';
   styleUrls: ['./room-approve.component.scss'],
 })
 export class RoomApproveComponent implements OnInit {
-  public rooms: [Room];
+  public rooms: [Room] = null;
   public toApprove: number = 0;
   constructor(private roomService: RoomService) {}
 
   ngOnInit(): void {
-    this.roomService.getCompanies().subscribe((data) => {
-      this.rooms = data;
-      data.forEach((room) => {
-        if (room !== null && !room.active) {
-          this.toApprove++;
-        }
-      });
+    this.roomService.getRooms().subscribe((data) => {
+      console.log(data);
+
+      if (data !== null) {
+        this.rooms = data;
+        data.forEach((room) => {
+          if (room !== null && !room.active) {
+            this.toApprove++;
+          }
+        });
+      }
     });
   }
 

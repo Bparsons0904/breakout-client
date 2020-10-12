@@ -14,12 +14,14 @@ const createRoom = gql`
     $description: String!
     $website: String!
     $imageUrl: String!
+    $companyId: ID!
   ) {
     createRoom(
       name: $name
       description: $description
       website: $website
       imageUrl: $imageUrl
+      companyId: $companyId
     ) {
       id
       name
@@ -27,6 +29,7 @@ const createRoom = gql`
       website
       imageUrl
       active
+      companyId
     }
   }
 `;
@@ -149,6 +152,8 @@ export class RoomService {
             `${room.name} has been Approved.`,
             3000
           );
+          console.log(data.approveRoom);
+
           this.rooms.next(data.approveRoom);
         },
         (error) => {
@@ -242,13 +247,10 @@ export class RoomService {
     this.messagesService.setInfoMessage(`Adding ${room.name}.`, 3000);
     // this.loading.next(true);
     this.apollo
-      .mutate({
+      .mutate<any>({
         mutation: createRoom,
         variables: {
-          name: room.name,
-          description: room.description,
-          website: room.website,
-          imageUrl: room.imageUrl,
+          ...room,
         },
       })
       .subscribe(
@@ -269,6 +271,7 @@ export class RoomService {
             `${room.name} has been Added.`,
             3000
           );
+          this.rooms.next(data.createRoom);
           console.log(data);
         },
         (error) => {
@@ -291,7 +294,7 @@ export class RoomService {
     return this.registerSuccess.asObservable();
   }
 
-  getCompanies(): Observable<[Room]> {
+  getRooms(): Observable<[Room]> {
     return this.rooms.asObservable();
   }
 }

@@ -15,24 +15,28 @@ import { Room } from '../../../models/Room';
 })
 export class CompanyDetailComponent implements OnInit {
   public id: string;
-  public company: Company;
+  public company: Company = null;
   public rooms: [Room?] = [];
 
   constructor(
     private roomService: RoomService,
-    route: ActivatedRoute,
+    private route: ActivatedRoute,
     private companyService: CompanyService
   ) {
-    route.params.subscribe((params) => {
+    this.route.params.subscribe((params) => {
       this.id = params.id;
     });
   }
 
   ngOnInit(): void {
     this.companyService.getCompany(this.id).subscribe((company) => {
-      this.company = company;
+      console.log(company);
+
+      if (company) {
+        this.company = company;
+      }
     });
-    this.roomService.getCompanies().subscribe((data) => {
+    this.roomService.getRooms().subscribe((data) => {
       if (data !== null) {
         data.forEach((room) => {
           if (room?.companyId === this.id) {
@@ -40,6 +44,6 @@ export class CompanyDetailComponent implements OnInit {
           }
         });
       }
-    });    
+    });
   }
 }

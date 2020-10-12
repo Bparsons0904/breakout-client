@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Room } from '../../../models/Room';
 import { RoomService } from '../../../services/room.service';
 import { MessagesService } from '../../../services/messages.service';
+import { ActivatedRoute } from '@angular/router';
+import { CompanyService } from '../../../services/company.service';
+import { Company } from '../../../models/Company';
 
 @Component({
   selector: 'app-room-create',
@@ -16,13 +19,34 @@ export class RoomCreateComponent implements OnInit {
     imageUrl: '',
     companyId: '',
   };
+  public id: string;
+  public companies: [Company?] = null;
 
   constructor(
     private roomService: RoomService,
-    private messageService: MessagesService
-  ) {}
+    private messageService: MessagesService,
+    private route: ActivatedRoute,
+    private companyService: CompanyService
+  ) {
+    this.route.params.subscribe((params) => {
+      if (params?.id) {
+        this.room.companyId = params.id;
+      }
+    });
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.room);
+
+    if (this.room.companyId === '') {
+      this.companyService.getCompanies().subscribe((companies) => {
+        if (companies) {
+          this.companies = companies;
+          console.log(this.companies);
+        }
+      });
+    }
+  }
 
   onSubmit(): void {
     this.messageService.setLoadingSmall(true);
@@ -35,7 +59,6 @@ export class RoomCreateComponent implements OnInit {
           description: '',
           website: '',
           imageUrl: '',
-
           companyId: '',
         };
       } else if (result === false) {
