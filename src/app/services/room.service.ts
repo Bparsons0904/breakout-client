@@ -47,6 +47,9 @@ const getRooms = gql`
       imageUrl
       active
       companyId
+      successes
+      attempts
+      fastest
     }
   }
 `;

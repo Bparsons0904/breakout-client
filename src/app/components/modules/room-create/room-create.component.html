@@ -4,7 +4,7 @@
     <div class="card-body">
       <h1>Submit a Breakout Room</h1>
       <form (ngSubmit)="onSubmit()">
-        <div class="mb-3" *ngIf="companies[0] !== null">
+        <div class="mb-3" *ngIf="companies !== null">
           <label for="companyId">Room Located at:</label>
           <select
             class="form-select"

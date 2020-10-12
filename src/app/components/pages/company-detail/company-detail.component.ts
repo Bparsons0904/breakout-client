@@ -43,6 +43,7 @@ export class CompanyDetailComponent implements OnInit {
             this.rooms.push(room);
           }
         });
+        console.log(this.rooms);
       }
     });
   }
