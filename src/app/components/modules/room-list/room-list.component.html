@@ -25,6 +25,45 @@
         <button (click)="removeRoom(room)" *ngIf="admin" class="btn btn-danger">
           Remove
         </button>
+        <div *ngIf="room.wishlist; then removeWishlist; else addWishlist"></div>
+        <ng-template #removeWishlist
+          ><button (click)="updateWishlist(room, false)">
+            Remove from Wishlist
+          </button>
+        </ng-template>
+        <ng-template #addWishlist
+          ><button (click)="updateWishlist(room, true)">
+            Add to Wishlist
+          </button></ng-template
+        >
+        <div *ngIf="room.favorite; then removeFavorite; else addFavorite"></div>
+        <ng-template #removeFavorite
+          ><button (click)="updateFavorite(room, false)">
+            Remove from Favorite
+          </button>
+        </ng-template>
+        <ng-template #addFavorite
+          ><button (click)="updateFavorite(room, true)">
+            Add to Favorite
+          </button></ng-template
+        >
+        <div
+          *ngIf="
+            room.completed;
+            then removeCompletedRooms;
+            else addCompletedRooms
+          "
+        ></div>
+        <ng-template #removeCompletedRooms
+          ><button (click)="updateCompletedRooms(room, false)">
+            Remove from CompletedRooms
+          </button>
+        </ng-template>
+        <ng-template #addCompletedRooms
+          ><button (click)="updateCompletedRooms(room, true)">
+            Add to CompletedRooms
+          </button></ng-template
+        >
       </div>
     </div>
   </div>

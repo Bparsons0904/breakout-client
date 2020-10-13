@@ -34,8 +34,6 @@ export class MessagesService {
   }
 
   public setInfoMessage(infoMessage: string, delay: number = 5000): void {
-    console.log(infoMessage);
-
     this.infoMessage.next(infoMessage);
     setTimeout(() => {
       this.clearInfoMessage();
@@ -58,13 +56,10 @@ export class MessagesService {
    * Return an observable to indicate if something is loading
    */
   public isLoadedSmall(): Observable<boolean> {
-    console.log('Observable out');
-
     return this.loadingSmall.asObservable();
   }
 
   public setLoadingSmall(loading: boolean): void {
     this.loadingSmall.next(loading);
-    console.log(loading);
   }
 }

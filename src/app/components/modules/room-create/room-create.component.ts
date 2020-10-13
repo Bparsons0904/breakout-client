@@ -42,7 +42,6 @@ export class RoomCreateComponent implements OnInit {
       this.companyService.getCompanies().subscribe((companies) => {
         if (companies) {
           this.companies = companies;
-          console.log(this.companies);
         }
       });
     }

@@ -17,15 +17,9 @@ const getMe = gql`
       username
       email
       role
-      wishlist {
-        id
-      }
-      completedRooms {
-        id
-      }
-      favorites {
-        id
-      }
+      wishlist
+      completedRooms
+      favorites
       successfulRooms
       failedRooms
     }
@@ -113,6 +107,7 @@ export class AuthService {
           if (data.me.role == 'admin') {
             this.admin.next(true);
           }
+          this.userService.setUser(data.me);
           // if (!data.me.completedProfile) {
           //   this.router.navigate(['/createprofile']);
           // } else {
@@ -123,8 +118,7 @@ export class AuthService {
           // If data id isn't included, set to false
           this.userAuthenticated.next(false);
           this.messagesService.setLoadingBig(false);
-          console.log("Getme issue");
-          
+          console.log('Getme issue');
         }
       });
   }

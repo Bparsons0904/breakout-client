@@ -168,7 +168,6 @@ export class CompanyService {
           // this.loading.next(false);
           // // Return to home page
           // this.router.navigate(['/']);
-          console.log(data);
           this.messagesService.clearInfoMessage();
           this.messagesService.setInfoMessage(
             `${company.name} has been Approved.`,
@@ -199,13 +198,11 @@ export class CompanyService {
         // this.loading = loading;
         // this.currentUser = data.currentUser;
         this.company.next(data.company);
-        console.log(data.company);
       });
     return this.company.asObservable();
   }
 
   removeCompany(company: Company): void {
-    console.log(company);
     this.messagesService.setInfoMessage(`Removing ${company.name}.`, 3000);
     this.apollo
       .mutate<any>({
@@ -280,7 +277,6 @@ export class CompanyService {
   // }
 
   registerCompany(company: Company): void {
-    console.log('made it to service', company);
     this.messagesService.setInfoMessage(`Adding ${company.name}.`, 3000);
     // this.loading.next(true);
     this.apollo
@@ -313,7 +309,6 @@ export class CompanyService {
             `${company.name} has been Added.`,
             3000
           );
-          console.log(data);
         },
         (error) => {
           // Stop loading

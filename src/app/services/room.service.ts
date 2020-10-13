@@ -104,8 +104,6 @@ export class RoomService {
         query: getRooms,
       })
       .valueChanges.subscribe(({ data, loading }) => {
-        console.log(data);
-
         this.rooms.next(data.rooms);
         // If no data or does not include me data, set authentiation to false
         // if (data === null || data.me === null) {
@@ -155,8 +153,6 @@ export class RoomService {
             `${room.name} has been Approved.`,
             3000
           );
-          console.log(data.approveRoom);
-
           this.rooms.next(data.approveRoom);
         },
         (error) => {
@@ -171,7 +167,6 @@ export class RoomService {
   }
 
   removeRoom(room: Room): void {
-    console.log(room);
     this.messagesService.setInfoMessage(`Removing ${room.name}.`, 3000);
     this.apollo
       .mutate<any>({
@@ -197,8 +192,6 @@ export class RoomService {
             `${room.name} has been Removed.`,
             3000
           );
-          console.log(data.removeRoom);
-
           this.rooms.next(data.removeRoom);
         },
         (error) => {
@@ -246,7 +239,6 @@ export class RoomService {
   // }
 
   registerRoom(room: Room): void {
-    console.log('made it to service', room);
     this.messagesService.setInfoMessage(`Adding ${room.name}.`, 3000);
     // this.loading.next(true);
     this.apollo

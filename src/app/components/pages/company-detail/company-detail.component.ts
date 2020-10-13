@@ -30,8 +30,6 @@ export class CompanyDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.companyService.getCompany(this.id).subscribe((company) => {
-      console.log(company);
-
       if (company) {
         this.company = company;
       }
@@ -43,7 +41,6 @@ export class CompanyDetailComponent implements OnInit {
             this.rooms.push(room);
           }
         });
-        console.log(this.rooms);
       }
     });
   }

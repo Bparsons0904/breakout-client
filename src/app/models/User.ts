@@ -1,16 +1,16 @@
 /**
  * Model for a user
  */
-import { Room } from './Room';
+// import { Room } from './Room';
 
 export interface User {
   id?: string;
   username: string;
   email: string;
   password?: string;
-  wishList?: [Room];
-  completedRooms?: [Room];
-  favorites?: [Room];
+  wishlist?: [string];
+  completedRooms?: [string];
+  favorites?: [string];
   role?: string;
   successfulRooms?: number;
   failedRooms?: number;

@@ -17,7 +17,6 @@ export class CompanyListComponent implements OnInit {
 
   ngOnInit(): void {
     this.companyService.getCompanies().subscribe((data) => {
-      console.log('List page ran', data);
       if (data !== null) {
         this.companies = data;
       }

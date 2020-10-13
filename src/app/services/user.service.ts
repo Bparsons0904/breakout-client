@@ -6,7 +6,7 @@ import gql from 'graphql-tag';
 import { User } from '../models/User';
 import { Room } from '../models/Room';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-// import { AuthService } from './auth.service';
+import { RoomService } from './room.service';
 
 /**
  * Mutation for registering user
@@ -43,6 +43,60 @@ const createProfile = gql`
       country: $country
     ) {
       id
+    }
+  }
+`;
+/**
+ * Mutation to update a user
+ */
+const updateWishlist = gql`
+  mutation updateWishlist($id: ID, $add: Boolean) {
+    updateWishlist(id: $id, add: $add) {
+      id
+      username
+      email
+      role
+      wishlist
+      completedRooms
+      favorites
+      successfulRooms
+      failedRooms
+    }
+  }
+`;
+/**
+ * Mutation to update a user
+ */
+const updateFavorite = gql`
+  mutation updateFavorite($id: ID, $add: Boolean) {
+    updateFavorite(id: $id, add: $add) {
+      id
+      username
+      email
+      role
+      wishlist
+      completedRooms
+      favorites
+      successfulRooms
+      failedRooms
+    }
+  }
+`;
+/**
+ * Mutation to update a user
+ */
+const updateCompletedRooms = gql`
+  mutation updateCompletedRooms($id: ID, $add: Boolean) {
+    updateCompletedRooms(id: $id, add: $add) {
+      id
+      username
+      email
+      role
+      wishlist
+      completedRooms
+      favorites
+      successfulRooms
+      failedRooms
     }
   }
 `;
@@ -89,8 +143,15 @@ export class UserService {
     username: '',
     email: '',
     role: '',
+    wishlist: [''],
+    completedRooms: [''],
+    favorites: [''],
+    successfulRooms: 0,
+    failedRooms: 0,
   };
 
+  private wishlist: BehaviorSubject<[Room]>;
+  private rooms: [Room];
   // private userProfile: BehaviorSubject<UserProfile>;
   // private defaultProfile: UserProfile = {
   //   userId: '',
@@ -109,19 +170,81 @@ export class UserService {
   // };
   constructor(
     private apollo: Apollo,
-    private router: Router // private authService: AuthService
+    private router: Router,
+    private roomService: RoomService
   ) {
     // Init Observables
     // this.userProfile = new BehaviorSubject<UserProfile>(this.defaultProfile);
     this.user = new BehaviorSubject<User>(this.defaultUser);
+    this.wishlist = new BehaviorSubject<[Room]>(null);
+  }
+
+  updateWishlist(room: Room, add: boolean) {
+    const wishlist: any = room.id;
+    this.apollo
+      .mutate<any>({
+        mutation: updateWishlist,
+        variables: {
+          id: wishlist,
+          add: add,
+        },
+      })
+      .subscribe(
+        ({ data }) => {
+          this.user.next({ ...data.updateWishlist });
+        },
+        (error) => {
+          console.log('there was an error sending the query', error);
+        }
+      );
+  }
+  updateFavorite(room: Room, add: boolean) {
+    const favorite: any = room.id;
+    console.log(favorite);
+
+    this.apollo
+      .mutate<any>({
+        mutation: updateFavorite,
+        variables: {
+          id: favorite,
+          add: add,
+        },
+      })
+      .subscribe(
+        ({ data }) => {
+          this.user.next({ ...data.updateFavorite });
+        },
+        (error) => {
+          console.log('there was an error sending the query', error);
+        }
+      );
+  }
+  updateCompletedRooms(room: Room, add: boolean) {
+    const completedRooms: any = room.id;
+    this.apollo
+      .mutate<any>({
+        mutation: updateCompletedRooms,
+        variables: {
+          id: completedRooms,
+          add: add,
+        },
+      })
+      .subscribe(
+        ({ data }) => {
+          this.user.next({ ...data.updateCompletedRooms });
+        },
+        (error) => {
+          console.log('there was an error sending the query', error);
+        }
+      );
   }
 
   /**
    * Set both private user and observable user
    */
   setUser(user: User): void {
-    // this.userDetails = { ...user };
     this.user.next({ ...user });
+    this.setRooms();
   }
 
   /**
@@ -139,6 +262,24 @@ export class UserService {
     this.userDetails = { ...this.defaultUser };
   }
 
+  setRooms(): void {
+    const user: User = this.user.getValue();
+    this.roomService.getRooms().subscribe((rooms) => {
+      if (rooms) {
+        let roomArray: [Room];
+        rooms.forEach((element) => {
+          if (user.wishlist.includes(element.id)) {
+            if (roomArray) {
+              roomArray.push(element);
+            } else {
+              roomArray = [element];
+            }
+          }
+        });
+        this.wishlist.next(roomArray);
+      }
+    });
+  }
   /**
    * Query and return user profile data as observable
    */

@@ -12,4 +12,8 @@ export interface Room {
   attempts?: number;
   fastest?: number;
   companyId?: string;
+
+  wishlist?: boolean;
+  favorite?: boolean;
+  completed?: boolean;
 }
