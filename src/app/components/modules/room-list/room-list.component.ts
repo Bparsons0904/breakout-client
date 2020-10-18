@@ -29,12 +29,18 @@ export class RoomListComponent implements OnInit {
           rooms.forEach((room) => {
             if (user.wishlist.includes(room.id)) {
               room.wishlist = true;
+            } else {
+              room.wishlist = false;
             }
             if (user.favorites.includes(room.id)) {
               room.favorite = true;
+            } else {
+              room.favorite = false;
             }
             if (user.completedRooms.includes(room.id)) {
               room.completed = true;
+            } else {
+              room.completed = false;
             }
           });
           this.rooms = rooms;

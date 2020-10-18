@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CompanyService } from '../../../services/company.service';
 import { Company } from '../../../models/Company';
 import { AuthService } from '../../../services/auth.service';
@@ -8,6 +8,9 @@ import { AuthService } from '../../../services/auth.service';
   styleUrls: ['./company-list.component.scss'],
 })
 export class CompanyListComponent implements OnInit {
+  @Input() major: number;
+  @Input() minor: number;
+
   public companies: [Company];
   public admin: boolean;
   constructor(

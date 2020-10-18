@@ -1,0 +1,22 @@
+<div class="container">
+  <form (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label class="form-label" for="time">Completion Time</label>
+      <input
+        class="form-control"
+        id="time"
+        type="text"
+        name="time"
+        [(ngModel)]="time"
+        placeholder="MM:SS"
+      />
+    </div>
+    <app-mini-loader></app-mini-loader>
+    <app-messages></app-messages>
+    <div class="row m-3">
+      <button type="submit" value="Submit" class="btn btn-primary">
+        Add Completion
+      </button>
+    </div>
+  </form>
+</div>

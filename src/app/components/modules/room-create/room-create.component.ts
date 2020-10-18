@@ -18,6 +18,7 @@ export class RoomCreateComponent implements OnInit {
     website: '',
     imageUrl: '',
     companyId: '',
+    timeLimit: null,
   };
   public id: string;
   public companies: [Company?] = null;
@@ -59,6 +60,7 @@ export class RoomCreateComponent implements OnInit {
           website: '',
           imageUrl: '',
           companyId: '',
+          timeLimit: 0,
         };
       } else if (result === false) {
         this.messageService.setLoadingSmall(false);

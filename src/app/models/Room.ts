@@ -12,7 +12,7 @@ export interface Room {
   attempts?: number;
   fastest?: number;
   companyId?: string;
-
+  timeLimit: number;
   wishlist?: boolean;
   favorite?: boolean;
   completed?: boolean;

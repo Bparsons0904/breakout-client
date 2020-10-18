@@ -15,6 +15,7 @@ const createRoom = gql`
     $website: String!
     $imageUrl: String!
     $companyId: ID!
+    $timeLimit: Float!
   ) {
     createRoom(
       name: $name
@@ -22,6 +23,7 @@ const createRoom = gql`
       website: $website
       imageUrl: $imageUrl
       companyId: $companyId
+      timeLimit: $timeLimit
     ) {
       id
       name
@@ -30,6 +32,7 @@ const createRoom = gql`
       imageUrl
       active
       companyId
+      timeLimit
     }
   }
 `;
@@ -50,6 +53,7 @@ const getRooms = gql`
       successes
       attempts
       fastest
+      timeLimit
     }
   }
 `;
@@ -82,6 +86,39 @@ const removeRoom = gql`
       website
       imageUrl
       active
+    }
+  }
+`;
+/**
+ * Mutation for approving rooms
+ */
+const completeRoom = gql`
+  mutation completeRoom($id: ID!, $time: Float) {
+    completeRoom(id: $id, time: $time) {
+      rooms {
+        id
+        name
+        description
+        website
+        imageUrl
+        active
+        companyId
+        successes
+        attempts
+        fastest
+        timeLimit
+      }
+      user {
+        id
+        username
+        email
+        role
+        wishlist
+        completedRooms
+        favorites
+        successfulRooms
+        failedRooms
+      }
     }
   }
 `;
@@ -124,6 +161,39 @@ export class RoomService {
         //   this.loading.next(false);
         // }
       });
+  }
+
+  completeRoom(roomId: any, time: number): void {
+    console.log('Got to service');
+    this.apollo
+      .mutate<any>({
+        mutation: completeRoom,
+        variables: {
+          id: roomId,
+          time: time,
+        },
+      })
+      .subscribe(
+        ({ data }) => {
+          this.rooms.next(data.completeRoom.rooms);
+
+          // Stop loading animation
+          this.messagesService.setLoadingSmall(false);
+          this.messagesService.clearInfoMessage();
+          this.messagesService.setInfoMessage(
+            `Room completion has been added.`,
+            3000
+          );
+        },
+        (error) => {
+          // Stop loading
+          this.messagesService.setLoadingSmall(false);
+          this.messagesService.setErrorMessage(
+            `There was an error adding room completion.`
+          );
+          console.log('there was an error sending the query', error);
+        }
+      );
   }
 
   approveRoom(room: Room): void {

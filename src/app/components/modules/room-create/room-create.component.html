@@ -14,8 +14,8 @@
             id="companyId"
           >
             <option selected>Select Company</option>
-            <option *ngFor="let company of companies" value="{{ company.id }}">
-              {{ company.name }}
+            <option *ngFor="let company of companies" value="{{ company?.id }}">
+              {{ company?.name }}
             </option>
           </select>
         </div>
@@ -57,6 +57,17 @@
             type="text"
             name="room.imageUrl"
             [(ngModel)]="room.imageUrl"
+          />
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="timeLimit">Room Time Limit</label>
+          <input
+            class="form-control"
+            id="timeLimit"
+            type="text"
+            name="room.timeLimit"
+            [(ngModel)]="room.timeLimit"
+            placeholder="Total Time In Minutes"
           />
         </div>
         <app-mini-loader></app-mini-loader>
