@@ -27,28 +27,32 @@
           }}
         </p>
         <a href="{{ room.website }}">Visit {{ room.name }}</a>
-        <button (click)="removeRoom(room)" *ngIf="admin" class="btn btn-danger">
+        <button
+          (click)="removeRoom(room)"
+          *ngIf="admin"
+          class="btn dark-accent"
+        >
           Remove
         </button>
         <div *ngIf="room.wishlist; then removeWishlist; else addWishlist"></div>
         <ng-template #removeWishlist
-          ><button (click)="updateWishlist(room, false)">
+          ><button class="btn primary" (click)="updateWishlist(room, false)">
             Remove from Wishlist
           </button>
         </ng-template>
         <ng-template #addWishlist
-          ><button (click)="updateWishlist(room, true)">
+          ><button class="btn primary" (click)="updateWishlist(room, true)">
             Add to Wishlist
           </button></ng-template
         >
         <div *ngIf="room.favorite; then removeFavorite; else addFavorite"></div>
         <ng-template #removeFavorite
-          ><button (click)="updateFavorite(room, false)">
+          ><button class="btn primary" (click)="updateFavorite(room, false)">
             Remove from Favorite
           </button>
         </ng-template>
         <ng-template #addFavorite
-          ><button (click)="updateFavorite(room, true)">
+          ><button class="btn primary" (click)="updateFavorite(room, true)">
             Add to Favorite
           </button></ng-template
         >
