@@ -1,8 +1,23 @@
 <section>
+  <div class="header">
+    <h1 class="text-center">Breakout Room Tracker</h1>
+  </div>
   <figure id="cover">
-    <!-- <video src="../../../assets/home_cover.mp4" muted autoplay loop></video> -->
+    <video src="/assets/home_lock.mp4" muted autoplay loop></video>
   </figure>
-  <div class="title">
-    <h1>This is our home page</h1>
+  <div class="staggered-container">
+    <button class="btn dark-accent" [routerLink]="['/room']">
+      See Available Rooms
+    </button>
+    <button class="btn dark-accent" [routerLink]="['/company']">
+      Maintain a Wishlist
+    </button>
+    <button class="btn dark-accent" [routerLink]="['/room']">Add Rooms</button>
+    <button class="btn dark-accent" [routerLink]="['/room']">
+      Track Completed Rooms
+    </button>
+    <button class="btn dark-accent" [routerLink]="['/company']">
+      View Breakout Room Companies
+    </button>
   </div>
 </section>

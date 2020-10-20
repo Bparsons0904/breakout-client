@@ -1,23 +1,24 @@
 <section>
-  <h3>Version {{major}}.{{minor}}</h3>
   <div *ngFor="let company of companies">
     <div class="card" *ngIf="company?.active">
       <img src="{{ company.imageUrl }}" class="card-img-top" alt="..." />
       <div class="card-body">
         <h5 class="card-title">{{ company.name }}</h5>
         <p class="card-text">{{ company.description }}</p>
-        <p class="card-text">{{ company.location }}</p>
-        <a href="{{ company.website }}">Visit {{ company.name }}</a>
-        <button [routerLink]="['details/', company.id]" class="btn btn-success">
-          Details
-        </button>
-        <button
-          (click)="removeCompany(company)"
-          *ngIf="admin"
-          class="btn btn-danger"
-        >
-          Remove
-        </button>
+        <p class="card-text">Located in {{ company.location }}</p>
+        <a href="{{ company.website }}">Visit {{ company.name }} Website</a>
+        <div class="company-options">
+          <button class="btn primary" [routerLink]="['details/', company.id]">
+            Details
+          </button>
+          <button
+            class="btn dark-accent"
+            (click)="removeCompany(company)"
+            *ngIf="admin"
+          >
+            Remove
+          </button>
+        </div>
       </div>
     </div>
   </div>

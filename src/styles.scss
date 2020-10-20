@@ -1,8 +1,34 @@
 /* You can add global styles to this file, and also import other style files */
+$color-light: #f2f5ef;
+$color-light-accent: #b5aeb6;
+$color-primary: #f49a48;
+$color-dark-accent: #ce435c;
+$color-dark: #32394b;
+body {
+  box-sizing: border-box;
+  // max-width: 100vw;
+  background-color: $color-dark;
+}
 a {
   text-decoration: none;
 }
 
 .authentication {
-  margin-top: .75rem;
+  margin-top: 0.75rem;
+}
+
+.btn {
+  width: 100%;
+  margin: 1rem 0;
+  padding: 1rem 0;
+  font-size: 1.2rem;
+}
+
+.dark-accent {
+  background-color: $color-dark-accent;
+  color: $color-light;
+}
+.primary {
+  background-color: $color-primary;
+  color: $color-light;
 }

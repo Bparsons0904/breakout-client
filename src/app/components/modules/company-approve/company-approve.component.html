@@ -7,10 +7,10 @@
         <p class="card-text">{{ company.description }}</p>
         <p class="card-text">{{ company.location }}</p>
         <a href="" class="">Visit {{ company.name }}</a>
-        <button class="btn btn-primary" (click)="setApproval(company)">
+        <button class="btn primary" (click)="setApproval(company)">
           Approve
         </button>
-        <button class="btn btn-danger" (click)="denyApproval(company)">
+        <button class="btn dark-accent" (click)="denyApproval(company)">
           Deny
         </button>
       </div>
@@ -18,5 +18,5 @@
   </div>
 </section>
 <section *ngIf="toApprove === 0">
-  <div>No rooms to approve!</div>
+  <h1 class="text-center">No rooms to approve!</h1>
 </section>

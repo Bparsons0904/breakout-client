@@ -1,5 +1,15 @@
+@import "../../../../styles.scss";
+
+nav {
+  background-color: $color-light !important;
+}
+.nav-link {
+  color: $color-dark !important;
+}
 .navbar-brand {
   margin-left: 1rem;
+  color: $color-dark !important;
+  font-weight: bold;
 }
 
 #navbarNav {
