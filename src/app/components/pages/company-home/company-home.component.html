@@ -1,4 +1,4 @@
-<section class="container">
+<section class="container mobile">
   <button class="btn primary" (click)="display('list')">
     List Breakout Companies
   </button>
@@ -9,7 +9,7 @@
     Approve Companies
   </button>
 </section>
-<section>
+<section class="mobile">
   <div *ngIf="displayType === 'list'">
     <app-company-list></app-company-list>
   </div>

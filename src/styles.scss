@@ -22,13 +22,23 @@ a {
   margin: 1rem 0;
   padding: 1rem 0;
   font-size: 1.2rem;
+  transition: all 0.5s;
 }
 
 .dark-accent {
   background-color: $color-dark-accent;
   color: $color-light;
 }
+
 .primary {
   background-color: $color-primary;
   color: $color-light;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
+.mobile {
+  max-width: 750px;
+  margin: auto;
 }

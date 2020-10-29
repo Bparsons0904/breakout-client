@@ -1,32 +1,3 @@
-// section {
-//   box-sizing: border-box;
-//   overflow-y: hidden;
-//   width: 100vw;
-//   height: auto;
-//   color: aliceblue;
-//   position: fixed;
-// }
-
-// #cover img {
-//   position: fixed;
-//   top: 0;
-//   left: 0;
-//   width: 100%;
-//   height: auto;
-// }
-
-// .title {
-//   background: #16161650;
-//   top: 40%;
-//   left: 50%;
-//   position: fixed;
-//   transform: translate(-50%, 50%);
-//   padding: 2rem;
-//   h1 {
-//     color: #ecead7;
-//   }
-// }
-
 @import "../../../../styles.scss";
 
 section {
@@ -44,10 +15,13 @@ section {
     display: block;
   }
 }
-figure {
+#cover {
   margin: 0;
   video {
     width: 100vw;
+    max-width: 1000px;
+    display: block;
+    margin: auto;
   }
 }
 
@@ -55,15 +29,17 @@ figure {
   margin: 0 auto;
   padding: 1.5rem;
   width: 100%;
+  max-width: 750px;
   p {
     color: $color-dark-accent;
     font-size: 1.4rem;
     padding: 1rem 0;
   }
-  // p:nth-child(even) {
-  //   text-align: center;
-  // }
-  // p:nth-child(3) {
-  //   text-align: right;
-  // }
+}
+
+@media (min-width: 720px) {
+  #cover {
+    video {
+    }
+  }
 }

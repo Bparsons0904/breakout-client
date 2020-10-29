@@ -1,4 +1,4 @@
-<section class="container">
+<section class="container mobile">
   <button class="btn primary" (click)="display('list')">
     List Breakout Rooms
   </button>
@@ -10,7 +10,7 @@
   </button>
   <app-messages></app-messages>
 </section>
-<section>
+<section class="mobile">
   <div *ngIf="displayType === 'list'">
     <app-room-list></app-room-list>
   </div>

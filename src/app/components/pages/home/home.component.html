@@ -2,9 +2,15 @@
   <div class="header">
     <h1 class="text-center">Breakout Room Tracker</h1>
   </div>
-  <figure id="cover">
-    <video src="/assets/home_lock.mp4" muted autoplay loop></video>
-  </figure>
+  <div id="cover">
+    <video
+      class="text-center"
+      src="/assets/home_lock.mp4"
+      muted
+      autoplay
+      loop
+    ></video>
+  </div>
   <div class="staggered-container">
     <button class="btn dark-accent" [routerLink]="['/room']">
       See Available Rooms

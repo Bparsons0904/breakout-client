@@ -1,4 +1,4 @@
-<section>
+<section class="mobile" id="details">
   <div *ngIf="company !== null">
     <div class="card">
       <img src="{{ company.imageUrl }}" class="card-img-top" alt="..." />
@@ -11,8 +11,11 @@
     </div>
   </div>
 </section>
-<section *ngIf="company !== null && rooms.length > 0">
-  <h1>{{ company.name }} @ {{ company.location }} Available Rooms</h1>
+<section *ngIf="company !== null && rooms.length > 0" class="mobile">
+  <div class="title">
+    <h1 class="text-center">{{ company.name }} @ {{ company.location }}</h1>
+    <h1 class="text-center">Available Rooms</h1>
+  </div>
   <div *ngFor="let room of rooms">
     <div class="card" *ngIf="room?.active">
       <img src="{{ room.imageUrl }}" class="card-img-top" alt="..." />
@@ -42,4 +45,6 @@
     </div>
   </div>
 </section>
-<app-room-create></app-room-create>
+<div class="mobile">
+  <app-room-create></app-room-create>
+</div>
