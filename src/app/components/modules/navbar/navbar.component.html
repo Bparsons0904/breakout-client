@@ -21,12 +21,6 @@
       <li class="nav-item" *ngIf="!userLoggedIn">
         <a class="nav-link" [routerLink]="['/login']">Login</a>
       </li>
-      <!-- <li class="nav-item" *ngIf="userLoggedIn">
-        <a class="nav-link" [routerLink]="['/profile']">Profile</a>
-      </li> -->
-      <!-- <li class="nav-item" *ngIf="userLoggedIn && !user.completedProfile">
-        <a class="nav-link" [routerLink]="['/createprofile']">Create Profile</a>
-      </li> -->
       <li class="nav-item">
         <a class="nav-link" [routerLink]="['/company']">Breakout Companies</a>
       </li>
@@ -34,7 +28,9 @@
         <a class="nav-link" [routerLink]="['/room']">Breakout Rooms</a>
       </li>
       <li class="nav-item" *ngIf="userLoggedIn">
-        <a class="nav-link" (click)="this.authService.logout()">Logout {{ user.username }}</a>
+        <a class="nav-link" (click)="this.authService.logout()"
+          >Logout {{ user.username }}</a
+        >
       </li>
       <li></li>
     </ul>
